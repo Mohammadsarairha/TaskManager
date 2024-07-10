@@ -43,9 +43,9 @@ namespace Services.Services
                     StartDate = addProjectTask.StartDate,
                     EndDate = addProjectTask.EndDate,
                     Note = addProjectTask.Note,
-                    ProjectId = addProjectTask.ProjectId,
+                    ProjectId = addProjectTask.ProjectId != 0 ? addProjectTask.ProjectId : null ,
                     UserId = addProjectTask.UserId,
-                    TaskTypeId = addProjectTask.TaskTypeId,
+                    TaskTypeId = addProjectTask.TaskTypeId != 0 ? addProjectTask.TaskTypeId : null,
                 };
 
                 var createdProjectTask = await projectTaskRepository.CreateAsync(newProjectTask);
@@ -77,9 +77,9 @@ namespace Services.Services
                     StartDate = updateProjectTask.StartDate,
                     EndDate = updateProjectTask.EndDate,
                     Note = updateProjectTask.Note,
-                    ProjectId = updateProjectTask.ProjectId,
+                    ProjectId = updateProjectTask.ProjectId != 0 ? updateProjectTask.ProjectId : null,
                     UserId = updateProjectTask.UserId,
-                    TaskTypeId = updateProjectTask.TaskTypeId,
+                    TaskTypeId = updateProjectTask.TaskTypeId != 0 ? updateProjectTask.TaskTypeId : null,
                 };
 
                 var result = await projectTaskRepository.UpdateAsync(id, updatedProjectTask);

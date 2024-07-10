@@ -28,7 +28,7 @@ namespace Services.Services
                     ProjectCode = addProject.ProjectCode,
                     StartDate = addProject.StartDate,
                     EndDate = addProject.EndDate,
-                    ParentProjectId = addProject.ParentProjectId,
+                    ParentProjectId = addProject.ParentProjectId != 0 ? addProject.ParentProjectId : null,
                     ProjectNote = addProject.ProjectNote,
                 };
 
@@ -78,7 +78,7 @@ namespace Services.Services
                     ProjectCode = updateProject.ProjectCode,
                     StartDate = updateProject.StartDate,
                     EndDate = updateProject.EndDate,
-                    ParentProjectId = updateProject.ParentProjectId,
+                    ParentProjectId = updateProject.ParentProjectId != 0 ? updateProject.ParentProjectId  : null ,
                     ProjectNote = updateProject.ProjectNote,
                 };
 

@@ -22,10 +22,23 @@ namespace Services.Services
 
         public async Task<ActionResult> Register(RegisterDto registerDto)
         {
+            if (registerDto.Password != registerDto.ConfirmPassword)
+                return new BadRequestObjectResult("Passwords do not match. Please try again");
+            var userMail = await userManager.FindByEmailAsync(registerDto.Email);
+            var userName = await userManager.FindByNameAsync(registerDto.UserName);
+            if (userMail != null && userName != null)
+                return new BadRequestObjectResult("Email and UserName already used");
+
+            if (userMail != null)
+                return new BadRequestObjectResult("Email already used");
+
+            if (userName != null)
+                return new BadRequestObjectResult("UserName already used");
+
             var identityUser = new IdentityUser
             {
                 UserName = registerDto.UserName,
-                Email = registerDto.UserName
+                Email = registerDto.Email
             };
             var identityResult = await userManager.CreateAsync(identityUser, registerDto.Password);
 

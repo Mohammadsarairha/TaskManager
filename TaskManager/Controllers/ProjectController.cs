@@ -28,7 +28,7 @@ namespace TaskManager.Controllers
         }
 
         [HttpGet]
-        [Route("{id:int}")]
+        [Route("{id}")]
         public Task<ActionResult> GetById([FromRoute] int id)
         {
             return projectService.GetByIdAsync(id);
@@ -41,14 +41,14 @@ namespace TaskManager.Controllers
         }
 
         [HttpPut]
-        [Route("{id:int}")]
+        [Route("{id}")]
         public Task<ActionResult> Update([FromRoute] int id, [FromBody] AddProjectDto Updateproject)
         {
             return projectService.UpdateAsync(id , Updateproject , ModelState);
         }
 
         [HttpDelete]
-        [Route("{id:int}")]
+        [Route("{id}")]
         public Task<ActionResult> Delete([FromRoute] int id)
         {
             return projectService.DeleteAsync(id);

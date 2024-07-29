@@ -22,9 +22,9 @@ namespace Repository.Repositories
         }
         public async Task<Project?> CreateAsync(Project project)
         {
-            await dbContext.Projects.AddAsync(project);
+            var newProject = await dbContext.Projects.AddAsync(project);
             await dbContext.SaveChangesAsync();
-
+            project.ID = newProject.Entity.ID;
             return project;
         }
         public async Task<Project?> DeleteAsync(int? Id)

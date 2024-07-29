@@ -5,11 +5,11 @@ namespace Domain.Dto
     public class RegisterDto
     {
         [Required]
-        public string? UserName { get; set; }
+        public string UserName { get; set; } = string.Empty;
 
         [Required]
         [EmailAddress(ErrorMessage = "Invalid email address")]
-        public string Email { get; set; }
+        public string Email { get; set; } = string.Empty;
 
         [Required]
         [DataType(DataType.Password)]

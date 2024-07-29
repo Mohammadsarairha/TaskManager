@@ -28,7 +28,7 @@ namespace TaskManager.Controllers
         }
 
         [HttpGet]
-        [Route("{id")]
+        [Route("{id}")]
         public Task<ActionResult> GetById([FromRoute] int id)
         {
             return projectTaskService.GetByIdAsync(id);

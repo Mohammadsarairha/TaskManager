@@ -24,6 +24,7 @@ namespace Services.Services
             {
                 var newProject = new Project()
                 {
+                    ID = null,
                     ProjectName = addProject.ProjectName,
                     ProjectCode = addProject.ProjectCode,
                     StartDate = addProject.StartDate,

@@ -6,8 +6,8 @@ namespace Domain.Models
     {
         public int? Id { get; set; }
         public string? TaskCode { get; set; }
-        public DateTime? StartDate { get; set; }
-        public DateTime? EndDate { get; set; }
+        public DateOnly? StartDate { get; set; }
+        public DateOnly? EndDate { get; set; }
         public string? Note { get; set; }
         public int? ProjectId { get; set; }
         public Project? Project { get; set; }

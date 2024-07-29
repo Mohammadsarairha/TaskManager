@@ -5,7 +5,6 @@ namespace Domain.Dto
     public class LoginDto
     {
         [Required]
-        [EmailAddress(ErrorMessage = "Invalid email address")]
         public string? UserName { get; set; }
 
         [Required]

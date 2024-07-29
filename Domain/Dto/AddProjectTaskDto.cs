@@ -5,8 +5,8 @@ namespace Domain.Dto
     public class AddProjectTaskDto
     {
         public string? TaskCode { get; set; }
-        public DateTime? StartDate { get; set; }
-        public DateTime? EndDate { get; set; }
+        public DateOnly? StartDate { get; set; }
+        public DateOnly? EndDate { get; set; }
         public string? Note { get; set; }
         public int? ProjectId { get; set; } = null;
         public string? UserId { get; set; } = string.Empty;

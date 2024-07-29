@@ -23,17 +23,17 @@ namespace Services.Services
         public async Task<ActionResult> Register(RegisterDto registerDto)
         {
             if (registerDto.Password != registerDto.ConfirmPassword)
-                return new BadRequestObjectResult("Passwords do not match. Please try again");
+                return new BadRequestObjectResult(new { message = "Passwords do not match. Please try again" });
             var userMail = await userManager.FindByEmailAsync(registerDto.Email);
             var userName = await userManager.FindByNameAsync(registerDto.UserName);
             if (userMail != null && userName != null)
-                return new BadRequestObjectResult("Email and UserName already used");
+                return new BadRequestObjectResult(new { message = "Email and Username already used" });
 
             if (userMail != null)
-                return new BadRequestObjectResult("Email already used");
+                return new BadRequestObjectResult(new { message = "Email already used" });
 
             if (userName != null)
-                return new BadRequestObjectResult("UserName already used");
+                return new BadRequestObjectResult(new { message = "Username already used" });
 
             var identityUser = new IdentityUser
             {
@@ -43,26 +43,34 @@ namespace Services.Services
             var identityResult = await userManager.CreateAsync(identityUser, registerDto.Password);
 
             if (identityResult.Succeeded)
-                return new OkObjectResult("User was registered !");
+                return new OkObjectResult(new { message = "User was registered !" });
 
-            return new BadRequestObjectResult("Something went wronge");
+            return new BadRequestObjectResult( new { message = "Something went wronge" });
         }
         public async Task<ActionResult> Login(LoginDto loginDto)
         {
             if (loginDto.UserName != null)
             {
-                var user = await userManager.FindByEmailAsync(loginDto.UserName);
+                var user = await userManager.FindByNameAsync(loginDto.UserName);
                 if (user != null)
                 {
                     var checkPassword = await userManager.CheckPasswordAsync(user, loginDto.Password);
                     if (checkPassword)
                     {
                         var jwtToken = authRepository.CreateJWTToken(user);
-                        return new OkObjectResult(jwtToken);
+                        return new OkObjectResult(new {username = user.UserName, token = jwtToken });
+                    }
+                    else
+                    {
+                        return new BadRequestObjectResult(new { message = "Password incorrect" });
                     }
                 }
+                else
+                {
+                    return new BadRequestObjectResult(new { message = "Username not found" });
+                }
             }
-            return new BadRequestObjectResult("UserName or Password incorrect");
+            return new BadRequestObjectResult(new { message = "Please fill Username" });
         }
         public async Task<List<IdentityUser>> GetAllUsersAsync()
         {
